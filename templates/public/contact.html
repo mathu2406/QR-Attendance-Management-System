@@ -1,8 +1,10 @@
+
+
 {% extends "layout/base.html" %}
 
 
 {% block title %}
-Contact
+Contact Us
 {% endblock %}
 
 
@@ -10,21 +12,209 @@ Contact
 {% block content %}
 
 
-<h1>
-Contact Us
-</h1>
+<style>
+
+.contact-container{
+
+    width:900px;
+    display:grid;
+    grid-template-columns:350px 1fr;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    margin:40px auto;
+
+}
 
 
-<p>
-Email:
-admin@attendance.com
-</p>
+.contact-left{
+
+    background:#0f172a;
+    color:white;
+    padding:40px;
+
+}
 
 
-<p>
-Phone:
-+94 77 0000000
-</p>
+.contact-left h2{
+
+    margin-bottom:20px;
+
+}
+
+
+.contact-left p{
+
+    margin:20px 0;
+    line-height:1.8;
+
+}
+
+
+.contact-left i{
+
+    color:#38bdf8;
+    margin-right:10px;
+
+}
+
+
+
+.contact-right{
+
+    padding:40px;
+
+}
+
+
+
+.contact-right input,
+.contact-right textarea{
+
+
+    width:100%;
+    padding:15px;
+    margin-top:15px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+
+
+}
+
+
+
+.contact-right textarea{
+
+    height:140px;
+    resize:none;
+
+}
+
+
+
+.contact-btn{
+
+
+    width:100%;
+    margin-top:20px;
+    padding:15px;
+    background:#1e3a8a;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:17px;
+    cursor:pointer;
+
+
+}
+
+
+.contact-btn:hover{
+
+    background:#0f172a;
+
+}
+
+
+</style>
+
+
+
+<div class="contact-container">
+
+
+    <div class="contact-left">
+
+
+        <h2>
+            Contact Us
+        </h2>
+
+
+        <p>
+            <i class="fas fa-envelope"></i>
+            admin@attendance.com
+        </p>
+
+
+        <p>
+            <i class="fas fa-phone"></i>
+            +94 77 0000000
+        </p>
+
+
+        <p>
+            <i class="fas fa-location-dot"></i>
+            Sri Lanka
+        </p>
+
+
+    </div>
+
+
+
+
+    <div class="contact-right">
+
+
+        <h2>
+            Send Message
+        </h2>
+
+
+
+        <form method="POST" action="/contact">
+
+
+            <input 
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required>
+
+
+            <input 
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required>
+
+
+            <input 
+            type="text"
+            name="subject"
+            placeholder="Subject"
+            required>
+
+
+
+            <textarea
+            name="message"
+            placeholder="Type your message..."
+            required></textarea>
+
+
+
+            <button class="contact-btn" type="submit">
+
+                <i class="fas fa-paper-plane"></i>
+                Send Message
+
+            </button>
+
+
+
+        </form>
+
+
+
+    </div>
+
+
+</div>
+
 
 
 {% endblock %}
