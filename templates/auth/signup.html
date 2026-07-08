@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 
 <html>
 
@@ -81,6 +81,856 @@ Signup
 <a href="/login">
 Already have account?
 </a>
+
+
+</body>
+
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Account | QR Attendance System</title>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+
+body{
+
+    min-height:100vh;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+
+/* Signup Card */
+
+.signup-container{
+
+    width:420px;
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+
+}
+
+
+/* Logo */
+
+.logo{
+
+    text-align:center;
+    margin-bottom:25px;
+
+}
+
+
+.logo h1{
+
+    color:#667eea;
+    font-size:30px;
+
+}
+
+
+.logo p{
+
+    color:#777;
+    margin-top:8px;
+
+}
+
+
+
+/* Form */
+
+.form-group{
+
+    margin-bottom:18px;
+
+}
+
+
+label{
+
+    display:block;
+    margin-bottom:7px;
+
+    font-weight:600;
+    color:#333;
+
+}
+
+
+
+input,select{
+
+    width:100%;
+
+    padding:13px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+
+input:focus,
+select:focus{
+
+    border-color:#667eea;
+
+}
+
+
+/* Button */
+
+
+button{
+
+
+    width:100%;
+
+    padding:14px;
+
+    background:#667eea;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+button:hover{
+
+    background:#5563d8;
+
+}
+
+
+
+/* Login Link */
+
+
+.login-link{
+
+    text-align:center;
+
+    margin-top:20px;
+
+}
+
+
+.login-link a{
+
+    color:#667eea;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="signup-container">
+
+
+<div class="logo">
+
+<h1>
+📱 QR Attendance
+</h1>
+
+<p>
+Create your account to get started
+</p>
+
+</div>
+
+
+
+<form method="POST">
+
+
+<div class="form-group">
+
+<label>
+Full Name
+</label>
+
+<input 
+type="text"
+name="name"
+placeholder="Enter your name"
+required>
+
+</div>
+
+
+
+
+<div class="form-group">
+
+<label>
+Email Address
+</label>
+
+<input 
+type="email"
+name="email"
+placeholder="Enter your email"
+required>
+
+</div>
+
+
+
+
+<div class="form-group">
+
+<label>
+Password
+</label>
+
+<input 
+type="password"
+name="password"
+placeholder="Create password"
+required>
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+<label>
+Account Type
+</label>
+
+
+<select name="role" required>
+
+
+<option value="">
+Select your role
+</option>
+
+
+<option value="student">
+Student
+</option>
+
+
+<option value="lecturer">
+Lecturer
+</option>
+
+
+<option value="admin">
+Administrator
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+<button type="submit">
+
+Create Account
+
+</button>
+
+
+
+</form>
+
+
+
+
+<div class="login-link">
+
+
+<p>
+Already registered?
+
+<a href="/login">
+Login here
+</a>
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+</body>
+
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Signup | QR Attendance System</title>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+
+body{
+
+    min-height:100vh;
+
+    background:#061a35;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+
+/* Main Container */
+
+.container{
+
+    width:900px;
+    height:700px;
+
+    background:white;
+
+    display:flex;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+
+}
+
+
+/* Left Side */
+
+
+.left-section{
+
+    width:45%;
+
+    background:linear-gradient(
+        160deg,
+        #002b5c,
+        #004aad
+    );
+
+    color:white;
+
+    padding:50px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+}
+
+
+
+.left-section h1{
+
+    font-size:38px;
+
+    margin-bottom:20px;
+
+}
+
+
+.left-section p{
+
+    font-size:17px;
+
+    line-height:1.7;
+
+    color:#d9e8ff;
+
+}
+
+
+
+.features{
+
+    margin-top:35px;
+
+}
+
+
+.features div{
+
+    margin-bottom:15px;
+
+    font-size:16px;
+
+}
+
+
+
+/* Right Section */
+
+
+.right-section{
+
+    width:55%;
+
+    padding:45px;
+
+}
+
+
+
+.right-section h2{
+
+    color:#002b5c;
+
+    font-size:30px;
+
+    margin-bottom:10px;
+
+}
+
+
+.subtitle{
+
+    color:#777;
+
+    margin-bottom:30px;
+
+}
+
+
+
+/* Form */
+
+
+.form-group{
+
+    margin-bottom:18px;
+
+}
+
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#333;
+
+    font-weight:600;
+
+}
+
+
+
+input,select{
+
+
+    width:100%;
+
+    padding:13px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    font-size:15px;
+
+}
+
+
+
+input:focus,
+select:focus{
+
+    outline:none;
+
+    border-color:#004aad;
+
+}
+
+
+
+
+button{
+
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:10px;
+
+    background:#004aad;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+    background:#002b5c;
+
+}
+
+
+
+.login{
+
+    text-align:center;
+
+    margin-top:20px;
+
+}
+
+
+.login a{
+
+    color:#004aad;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+
+
+
+
+/* Mobile Responsive */
+
+
+@media(max-width:800px){
+
+
+.container{
+
+    width:90%;
+
+    height:auto;
+
+    flex-direction:column;
+
+}
+
+
+.left-section,
+.right-section{
+
+    width:100%;
+
+}
+
+
+}
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="container">
+
+
+
+<!-- Left Branding -->
+
+
+<div class="left-section">
+
+
+<h1>
+QR Attendance
+</h1>
+
+
+<p>
+
+Smart attendance management system
+for universities and institutions.
+
+</p>
+
+
+
+<div class="features">
+
+
+<div>
+✔ QR Code Based Attendance
+</div>
+
+
+<div>
+✔ Student Attendance Tracking
+</div>
+
+
+<div>
+✔ Lecturer Dashboard
+</div>
+
+
+<div>
+✔ Automatic Eligibility Checking
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- Signup Form -->
+
+
+<div class="right-section">
+
+
+<h2>
+Create Account
+</h2>
+
+
+<p class="subtitle">
+Join the QR Attendance Management System
+</p>
+
+
+
+<form method="POST">
+
+
+
+<div class="form-group">
+
+<label>
+Full Name
+</label>
+
+
+<input 
+type="text"
+name="name"
+placeholder="Enter your full name"
+required>
+
+
+</div>
+
+
+
+
+<div class="form-group">
+
+<label>
+Email Address
+</label>
+
+
+<input 
+type="email"
+name="email"
+placeholder="Enter email address"
+required>
+
+
+</div>
+
+
+
+
+<div class="form-group">
+
+<label>
+Password
+</label>
+
+
+<input 
+type="password"
+name="password"
+placeholder="Create password"
+required>
+
+
+</div>
+
+
+
+
+<div class="form-group">
+
+<label>
+Select Role
+</label>
+
+
+<select name="role" required>
+
+
+<option value="">
+Choose account type
+</option>
+
+
+<option value="student">
+Student
+</option>
+
+
+<option value="lecturer">
+Lecturer
+</option>
+
+
+<option value="admin">
+Admin
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+<button type="submit">
+
+Create Account
+
+</button>
+
+
+
+</form>
+
+
+
+<div class="login">
+
+Already have an account?
+
+<a href="/login">
+Login
+</a>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
 
 
 </body>
