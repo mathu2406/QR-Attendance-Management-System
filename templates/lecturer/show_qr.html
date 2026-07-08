@@ -1,0 +1,17 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+
+<div class="qr-box">
+
+<h2>Attendance QR Code</h2>
+
+<p>Token: {{ token }}</p>
+
+<img src="/{{ qr_image }}" width="250">
+
+<p>Valid for 5 minutes only</p>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+
+<div class="profile">
+
+<h2>Student Profile</h2>
+
+<p><b>Name:</b> {{ user.name }}</p>
+
+<p><b>Email:</b> {{ user.email }}</p>
+
+<p><b>Role:</b> {{ user.role }}</p>
+
+<p><b>Attendance:</b> {{ user.attendance }}%</p>
+
+<p>
+<b>Status:</b>
+
+{% if user.attendance >= 80 %}
+<span style="color:green;">Eligible</span>
+{% else %}
+<span style="color:red;">Not Eligible</span>
+{% endif %}
+
+</p>
+
+</div>
+
+{% endblock %}
