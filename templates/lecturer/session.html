@@ -1,0 +1,50 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+
+<h2>Live Attendance</h2>
+
+<h3 id="count">0 Students Present</h3>
+
+<table border="1">
+
+<thead>
+
+<tr>
+<th>Name</th>
+<th>Time</th>
+</tr>
+
+</thead>
+
+<tbody id="attendanceTable">
+
+</tbody>
+
+</table>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+<script>
+
+const socket = io();
+
+socket.on("student_scanned", function(data){
+
+    let row =
+    `
+    <tr>
+        <td>${data.student}</td>
+        <td>${data.time}</td>
+    </tr>
+    `;
+
+    document
+    .getElementById("attendanceTable")
+    .innerHTML += row;
+
+});
+
+</script>
+
+{% endblock %}

@@ -1,31 +1,614 @@
 {% extends "layout/base.html" %}
 
+
 {% block content %}
 
-<h2>Generate QR Code</h2>
+
+<style>
+
+
+*{
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+
+
+
+.qr-page{
+
+
+    min-height:90vh;
+
+    background:
+    linear-gradient(
+        135deg,
+        #061a35,
+        #004aad
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+
+}
+
+
+
+
+.qr-container{
+
+
+    width:900px;
+
+    background:white;
+
+    border-radius:30px;
+
+    padding:45px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:40px;
+
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.3);
+
+
+    animation:show .8s ease;
+
+
+}
+
+
+
+
+
+
+/* Left */
+
+
+.qr-content h1{
+
+
+    font-size:38px;
+
+    color:#061a35;
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+.qr-content p{
+
+
+    color:#64748b;
+
+    line-height:1.7;
+
+
+}
+
+
+
+
+.lecturer-card{
+
+
+    margin-top:30px;
+
+    padding:20px;
+
+    background:#f1f5f9;
+
+    border-radius:20px;
+
+
+}
+
+
+
+
+.lecturer-card h3{
+
+
+    color:#004aad;
+
+
+}
+
+
+
+
+
+
+
+.form-group{
+
+
+    margin-top:25px;
+
+}
+
+
+
+label{
+
+
+    font-weight:600;
+
+    color:#334155;
+
+
+}
+
+
+
+input{
+
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:10px;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+    font-size:16px;
+
+
+}
+
+
+
+input:focus{
+
+
+    outline:none;
+
+    border-color:#004aad;
+
+
+}
+
+
+
+
+
+
+.generate-btn{
+
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:30px;
+
+
+    background:
+    linear-gradient(
+    135deg,
+    #004aad,
+    #38bdf8
+    );
+
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+
+    transition:.4s;
+
+
+}
+
+
+
+.generate-btn:hover{
+
+
+    transform:scale(1.05);
+
+    box-shadow:0 15px 30px #cbd5e1;
+
+
+}
+
+
+
+
+
+
+
+/* Right QR Preview */
+
+
+.qr-preview{
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+}
+
+
+
+.qr-circle{
+
+
+    width:260px;
+
+    height:260px;
+
+
+    background:#f8fafc;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    border:8px solid #004aad;
+
+
+    animation:pulse 2s infinite;
+
+
+}
+
+
+
+.qr-circle span{
+
+
+    font-size:70px;
+
+}
+
+
+
+.scan-text{
+
+
+    margin-top:25px;
+
+    color:#475569;
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+
+
+
+/* Generated QR */
+
+
+.generated{
+
+
+    margin-top:30px;
+
+    text-align:center;
+
+
+}
+
+
+.generated img{
+
+
+    width:220px;
+
+    padding:15px;
+
+    background:white;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 35px #ddd;
+
+
+}
+
+
+
+
+
+
+
+
+
+@keyframes show{
+
+
+from{
+
+opacity:0;
+
+transform:translateY(50px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+
+
+@keyframes pulse{
+
+
+50%{
+
+
+transform:scale(1.08);
+
+
+}
+
+
+}
+
+
+
+
+
+@media(max-width:800px){
+
+
+.qr-container{
+
+
+grid-template-columns:1fr;
+
+
+}
+
+
+}
+
+
+
+</style>
+
+
+
+
+
+<div class="qr-page">
+
+
+
+<div class="qr-container">
+
+
+
+
+
+<!-- Left Section -->
+
+
+<div class="qr-content">
+
+
+
+<h1>
+
+Generate Attendance QR
+
+</h1>
+
+
+
+<p>
+
+Create a secure QR code for your lecture.
+Students can scan this QR code to mark attendance instantly.
+
+</p>
+
+
+
+
+<div class="lecturer-card">
+
+
+<h3>
+
+👨‍🏫 {{ current_user.name }}
+
+</h3>
+
+
+<p>
+
+Lecturer Account
+
+</p>
+
+
+</div>
+
+
+
+
+
+
 
 <form method="POST">
 
-    <input
-        type="text"
-        name="subject"
-        placeholder="Subject"
-        required>
 
-    <button type="submit">
-        Generate QR
-    </button>
+
+<div class="form-group">
+
+
+<label>
+
+Subject Name
+
+</label>
+
+
+<input 
+type="text"
+name="subject"
+placeholder="Enter subject name"
+required>
+
+
+</div>
+
+
+
+
+
+<button class="generate-btn">
+
+
+🚀 Generate QR Code
+
+
+</button>
+
+
 
 </form>
 
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- Right Section -->
+
+
+<div class="qr-preview">
+
+
+
+<div class="qr-circle">
+
+
+<span>
+
+📱
+
+</span>
+
+
+</div>
+
+
+
+<div class="scan-text">
+
+
+<h2>
+
+QR Attendance
+
+</h2>
+
+
+<p>
+
+Students scan this code to record attendance
+
+</p>
+
+
+</div>
+
 {% if qr_image %}
 
-    <h3>Scan this QR</h3>
+<div class="generated">
 
-    <img
-        src="{{ url_for('static', filename='qr/' + qr_image) }}"
-        width="300">
+
+<h3>
+✅ QR Generated Successfully
+</h3>
+
+
+<img src="{{ qr_image }}"
+     width="250">
+
+
+<p>
+Students can scan this QR code
+</p>
+
+
+</div>
+
 
 {% endif %}
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
 
 {% endblock %}

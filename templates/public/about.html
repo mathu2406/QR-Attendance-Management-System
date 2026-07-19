@@ -1,156 +1,1663 @@
 {% extends "layout/base.html" %}
 
-
 {% block title %}
 About Us
 {% endblock %}
 
-
-
 {% block content %}
 
+<style>
 
-<section class="about-hero">
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    <h1>
-        About Attendance Management System
-    </h1>
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#f4f8fd;
+    overflow-x:hidden;
+}
 
-    <p>
-        A smart QR Code based attendance management solution
-        designed to simplify attendance tracking for educational
-        institutions.
-    </p>
+/* ================= HERO ================= */
 
-</section>
+.about-hero{
+
+    position:relative;
+
+    min-height:85vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    background:linear-gradient(135deg,#001b44,#003b8e,#0059d6);
+
+    overflow:hidden;
+
+}
+
+/* Floating Circles */
+
+.about-hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:380px;
+
+    height:380px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:50%;
+
+    left:-120px;
+
+    top:-100px;
+
+    animation:float1 8s ease-in-out infinite;
+
+}
+
+.about-hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+
+    height:300px;
+
+    background:rgba(255,255,255,.06);
+
+    border-radius:50%;
+
+    right:-100px;
+
+    bottom:-120px;
+
+    animation:float2 10s ease-in-out infinite;
+
+}
+
+.hero-content{
+
+    max-width:900px;
+
+    padding:20px;
+
+    position:relative;
+
+    z-index:10;
+
+    animation:fadeUp 1s ease;
+
+}
+
+.hero-content h1{
+
+    font-size:58px;
+
+    color:#fff;
+
+    margin-bottom:25px;
+
+    font-weight:700;
+
+}
+
+.hero-content p{
+
+    font-size:20px;
+
+    color:#d8e6ff;
+
+    line-height:1.9;
+
+    margin-bottom:40px;
+
+}
+
+.hero-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.btn{
+
+    text-decoration:none;
+
+    padding:15px 35px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+.btn-primary{
+
+    background:white;
+
+    color:#004aad;
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 12px 30px rgba(255,255,255,.25);
+
+}
+
+.btn-outline{
+
+    border:2px solid white;
+
+    color:white;
+
+}
+
+.btn-outline:hover{
+
+    background:white;
+
+    color:#004aad;
+
+}
+
+/* Scroll Down */
+
+.scroll{
+
+    position:absolute;
+
+    bottom:30px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    color:white;
+
+    font-size:30px;
+
+    animation:bounce 2s infinite;
+
+}
+
+/* Animations */
+
+@keyframes float1{
+
+0%{transform:translateY(0);}
+50%{transform:translateY(30px);}
+100%{transform:translateY(0);}
+
+}
+
+@keyframes float2{
+
+0%{transform:translateY(0);}
+50%{transform:translateY(-35px);}
+100%{transform:translateY(0);}
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(50px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes bounce{
+
+0%,100%{
+
+transform:translate(-50%,0);
+
+}
+
+50%{
+
+transform:translate(-50%,12px);
+
+}
+
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.hero-content h1{
+
+font-size:42px;
+
+}
+
+.hero-content p{
+
+font-size:17px;
+
+}
+
+}
+
+<!-- ================= WHO WE ARE ================= -->
+
+<style>
+
+.about-container{
+
+    max-width:1200px;
+
+    max-height:200px;
+
+    margin:90px auto;
+
+    padding:0 20px;
+
+}
+
+.about-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:60px;
+
+    align-items:center;
+
+}
+
+/* Left */
+
+.about-image{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    animation:floatImage 5s ease-in-out infinite;
+
+}
+
+.about-image img{
+
+    width:100%;
+
+    max-width:500px;
+
+    border-radius:25px;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.15);
+
+}
+
+/* Decorative Cards */
+
+.floating-card{
+
+    position:absolute;
+
+    background:white;
+
+    padding:18px 22px;
+
+    border-radius:16px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+    animation:floatCard 4s ease-in-out infinite;
+
+}
+
+.card-top{
+
+    top:20px;
+
+    left:-20px;
+
+}
+
+.card-bottom{
+
+    bottom:20px;
+
+    right:-20px;
+
+}
+
+/* Right */
+
+.about-text h5{
+
+    color:#004aad;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    margin-bottom:15px;
+
+}
+
+.about-text h2{
+
+    font-size:42px;
+
+    color:#002b5c;
+
+    margin-bottom:25px;
+
+    line-height:1.3;
+
+}
+
+.about-text p{
+
+    color:#666;
+
+    font-size:17px;
+
+    line-height:1.9;
+
+    margin-bottom:20px;
+
+    text-align:justify;
+
+}
+
+/* Feature List */
+
+.feature-list{
+
+    margin-top:30px;
+
+}
+
+.feature-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:18px;
+
+}
+
+.feature-icon{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    background:#004aad;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:22px;
+
+}
+
+.feature-item span{
+
+    font-size:17px;
+
+    color:#444;
+
+    font-weight:500;
+
+}
+
+/* Animations */
+
+@keyframes floatImage{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-15px);
+
+}
+
+}
+
+@keyframes floatCard{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.about-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.about-text{
+
+text-align:center;
+
+}
+
+.feature-item{
+
+justify-content:center;
+
+}
+
+.card-top,
+.card-bottom{
+
+display:none;
+
+}
+
+}
+
+</style>
+
+<!-- ================= MISSION & VISION ================= -->
+
+<style>
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:60px;
+
+}
+
+.section-title h2{
+
+    font-size:42px;
+
+    color:#002b5c;
+
+    margin-bottom:15px;
+
+}
+
+.section-title p{
+
+    color:#666;
+
+    font-size:18px;
+
+}
+
+/* Mission Cards */
+
+.mission-grid{
+
+    max-width:1200px;
+
+    margin:80px auto;
+
+    padding:0 20px;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+
+    gap:35px;
+
+}
+
+.mission-card{
+
+    background:rgba(255,255,255,.95);
+
+    border-radius:22px;
+
+    padding:40px 35px;
+
+    text-align:center;
+
+    box-shadow:0 18px 45px rgba(0,0,0,.08);
+
+    transition:.4s;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.mission-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+
+    height:120px;
+
+    background:rgba(0,74,173,.08);
+
+    border-radius:50%;
+
+    top:-40px;
+
+    right:-40px;
+
+}
+
+.mission-card:hover{
+
+    transform:translateY(-12px);
+
+    box-shadow:0 25px 55px rgba(0,0,0,.15);
+
+}
+
+.mission-icon{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    margin-bottom:25px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#004aad,#002b5c);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:40px;
+
+}
+
+.mission-card h3{
+
+    color:#002b5c;
+
+    margin-bottom:18px;
+
+    font-size:28px;
+
+}
+
+.mission-card p{
+
+    color:#666;
+
+    line-height:1.9;
+
+}
+
+/* Why Choose Us */
+
+.choose-section{
+
+    background:#f8fbff;
+
+    padding:90px 20px;
+
+    margin-top:40px;
+
+}
+
+.choose-grid{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+}
+
+.choose-card{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.choose-card:hover{
+
+    transform:translateY(-10px);
+
+    background:#004aad;
+
+    color:white;
+
+}
+
+.choose-card:hover h3,
+.choose-card:hover p{
+
+    color:white;
+
+}
+
+.choose-icon{
+
+    font-size:55px;
+
+    margin-bottom:20px;
+
+}
+
+.choose-card h3{
+
+    color:#002b5c;
+
+    margin-bottom:15px;
+
+    transition:.3s;
+
+}
+
+.choose-card p{
+
+    color:#666;
+
+    line-height:1.8;
+
+    transition:.3s;
+
+}
+
+</style>
 
 
+<section class="mission-section">
 
-<section class="about-section">
-
-
-    <div class="about-card">
-
-        <h2>
-            Our Vision
-        </h2>
-
-        <p>
-            Our vision is to create a modern digital attendance
-            environment where students, lecturers and administrators
-            can manage attendance efficiently without manual paperwork.
-        </p>
-
-    </div>
-
-
-
-    <div class="about-card">
-
-        <h2>
-            Our Mission
-        </h2>
-
-        <p>
-            We aim to provide a secure, fast and reliable QR-based
-            attendance system that improves accuracy and saves time
-            for academic institutions.
-        </p>
-
-    </div>
-
-
-
-</section>
-
-
-
-
-
-<section class="features">
-
+<div class="section-title">
 
 <h2>
-Why Choose Our System?
+
+Our Mission & Vision
+
 </h2>
 
-
-
-<div class="feature-container">
-
-
-
-<div class="feature-card">
-
-<h3>
-QR Code Attendance
-</h3>
-
 <p>
-Lecturers can generate QR codes and students
-can mark attendance instantly through scanning.
+
+Building the future of digital attendance management.
+
 </p>
 
 </div>
 
+<div class="mission-grid">
 
+<div class="mission-card">
 
+<div class="mission-icon">
 
-<div class="feature-card">
+🎯
+
+</div>
 
 <h3>
-Real Time Tracking
+
+Our Mission
+
 </h3>
 
 <p>
-Attendance records are updated immediately
-and available for monitoring.
+
+To provide educational institutions with a fast, secure and user-friendly attendance management platform that minimizes paperwork, improves accuracy and saves valuable time.
+
 </p>
 
 </div>
 
+<div class="mission-card">
 
+<div class="mission-icon">
 
+🚀
 
-<div class="feature-card">
+</div>
 
 <h3>
-Eligibility Monitoring
+
+Our Vision
+
 </h3>
 
 <p>
-The system automatically calculates attendance
-percentage and student eligibility.
+
+To become a trusted digital attendance solution that transforms traditional attendance tracking into a smart, secure and fully automated experience.
+
 </p>
 
 </div>
 
-
-
-<div class="feature-card">
-
-<h3>
-Role Based Access
-</h3>
-
-<p>
-Separate dashboards are available for Admin,
-Lecturer and Student users.
-</p>
-
 </div>
-
-
-
-</div>
-
 
 </section>
 
 
 
+<section class="choose-section">
+
+<div class="section-title">
+
+<h2>
+
+Why Choose Our System?
+
+</h2>
+
+<p>
+
+Everything you need for smart attendance management.
+
+</p>
+
+</div>
+
+<div class="choose-grid">
+
+<div class="choose-card">
+
+<div class="choose-icon">
+
+📱
+
+</div>
+
+<h3>
+
+QR Attendance
+
+</h3>
+
+<p>
+
+Quick attendance using secure QR Code technology.
+
+</p>
+
+</div>
+
+<div class="choose-card">
+
+<div class="choose-icon">
+
+👨‍🏫
+
+</div>
+
+<h3>
+
+Role-Based Access
+
+</h3>
+
+<p>
+
+Separate dashboards for Students, Lecturers and Administrators.
+
+</p>
+
+</div>
+
+<div class="choose-card">
+
+<div class="choose-icon">
+
+📊
+
+</div>
+
+<h3>
+
+Real-Time Reports
+
+</h3>
+
+<p>
+
+Instant attendance reports and eligibility monitoring.
+
+</p>
+
+</div>
+
+<div class="choose-card">
+
+<div class="choose-icon">
+
+🔒
+
+</div>
+
+<h3>
+
+Secure Platform
+
+</h3>
+
+<p>
+
+Protected user accounts and reliable attendance records.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= STATISTICS ================= -->
+
+<style>
+
+/* Statistics */
+
+.stats-section{
+
+    background:linear-gradient(135deg,#002b5c,#004aad);
+
+    padding:80px 20px;
+
+    margin-top:80px;
+
+}
+
+.stats-container{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:30px;
+
+}
+
+.stat-card{
+
+    text-align:center;
+
+    color:white;
+
+    padding:30px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(10px);
+
+    transition:.35s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-10px);
+
+    background:rgba(255,255,255,.15);
+
+}
+
+.stat-card h2{
+
+    font-size:48px;
+
+    margin-bottom:10px;
+
+}
+
+.stat-card p{
+
+    color:#dbe8ff;
+
+    font-size:17px;
+
+}
+
+/* Timeline */
+
+.timeline{
+
+    max-width:1200px;
+
+    margin:90px auto;
+
+    padding:0 20px;
+
+}
+
+.timeline-title{
+
+    text-align:center;
+
+    margin-bottom:60px;
+
+}
+
+.timeline-title h2{
+
+    color:#002b5c;
+
+    font-size:42px;
+
+}
+
+.timeline-title p{
+
+    color:#666;
+
+    margin-top:10px;
+
+}
+
+.timeline-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+}
+
+.step{
+
+    background:white;
+
+    padding:35px 25px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.step:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.step-number{
+
+    width:70px;
+
+    height:70px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#004aad;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    margin-bottom:20px;
+
+}
+
+.step h3{
+
+    color:#002b5c;
+
+    margin-bottom:15px;
+
+}
+
+.step p{
+
+    color:#666;
+
+    line-height:1.8;
+
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.stats-container{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.timeline-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:600px){
+
+.stats-container{
+
+grid-template-columns:1fr;
+
+}
+
+.timeline-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+
+<section class="stats-section">
+
+<div class="stats-container">
+
+<div class="stat-card">
+
+<h2>100%</h2>
+
+<p>Digital Attendance</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>3</h2>
+
+<p>User Roles</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>24/7</h2>
+
+<p>System Availability</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>QR</h2>
+
+<p>Powered Technology</p>
+
+</div>
+
+</div>
+
+</section>
 
 
 
+<section class="timeline">
+
+<div class="timeline-title">
+
+<h2>How Our System Works</h2>
+
+<p>
+
+A simple and secure attendance process.
+
+</p>
+
+</div>
+
+<div class="timeline-grid">
+
+<div class="step">
+
+<div class="step-number">
+
+1
+
+</div>
+
+<h3>Generate QR</h3>
+
+<p>
+
+Lecturers create a secure QR Code for the class session.
+
+</p>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+
+2
+
+</div>
+
+<h3>Scan QR</h3>
+
+<p>
+
+Students scan the QR Code using their account.
+
+</p>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+
+3
+
+</div>
+
+<h3>Attendance Saved</h3>
+
+<p>
+
+Attendance is instantly recorded in the database.
+
+</p>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+
+4
+
+</div>
+
+<h3>View Reports</h3>
+
+<p>
+
+Students and lecturers can monitor attendance and eligibility.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CALL TO ACTION ================= -->
+
+<style>
+
+/* ================= CTA ================= */
+
+.cta-section{
+
+    max-width:1200px;
+
+    margin:90px auto;
+
+    padding:0 20px;
+
+}
+
+.cta-box{
+
+    background:linear-gradient(135deg,#002b5c,#004aad);
+
+    border-radius:30px;
+
+    padding:70px 50px;
+
+    text-align:center;
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.cta-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+
+    height:260px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:50%;
+
+    top:-80px;
+
+    left:-80px;
+
+}
+
+.cta-box::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+
+    height:220px;
+
+    background:rgba(255,255,255,.06);
+
+    border-radius:50%;
+
+    bottom:-80px;
+
+    right:-80px;
+
+}
+
+.cta-content{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.cta-content h2{
+
+    font-size:42px;
+
+    margin-bottom:20px;
+
+}
+
+.cta-content p{
+
+    max-width:700px;
+
+    margin:auto;
+
+    line-height:1.9;
+
+    color:#dbe8ff;
+
+    margin-bottom:35px;
+
+    font-size:18px;
+
+}
+
+.cta-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.cta-btn{
+
+    padding:15px 35px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+.cta-primary{
+
+    background:white;
+
+    color:#004aad;
+
+}
+
+.cta-primary:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 15px 35px rgba(255,255,255,.25);
+
+}
+
+.cta-outline{
+
+    border:2px solid white;
+
+    color:white;
+
+}
+
+.cta-outline:hover{
+
+    background:white;
+
+    color:#004aad;
+
+}
+
+/* ================= FOOTER ================= */
+
+.about-footer{
+
+    margin-top:80px;
+
+    background:#001b44;
+
+    color:white;
+
+    padding:60px 30px 20px;
+
+}
+
+.footer-grid{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr;
+
+    gap:40px;
+
+}
+
+.footer-grid h2,
+.footer-grid h3{
+
+    margin-bottom:20px;
+
+}
+
+.footer-grid p{
+
+    color:#d7e5ff;
+
+    line-height:1.8;
+
+}
+
+.footer-links{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.footer-links a{
+
+    color:#d7e5ff;
+
+    text-decoration:none;
+
+    margin-bottom:12px;
+
+    transition:.3s;
+
+}
+
+.footer-links a:hover{
+
+    color:white;
+
+    padding-left:8px;
+
+}
+
+.footer-divider{
+
+    max-width:1200px;
+
+    margin:35px auto 20px;
+
+    height:1px;
+
+    background:rgba(255,255,255,.15);
+
+}
+
+.footer-copy{
+
+    text-align:center;
+
+    color:#c8d8ff;
+
+    font-size:15px;
+
+}
+
+@media(max-width:900px){
+
+.footer-grid{
+
+grid-template-columns:1fr;
+
+text-align:center;
+
+}
+
+}
+
+</style>
+
+<section class="cta-section">
+
+<div class="cta-box">
+
+<div class="cta-content">
+
+<h2>
+
+Ready to Experience Smart Attendance?
+
+</h2>
+
+<p>
+
+Join the next generation of digital attendance management.
+Our QR Attendance Management System helps educational institutions
+save time, improve accuracy and simplify attendance tracking.
+
+</p>
+
+<div class="cta-buttons">
+
+<a href="{{ url_for('auth.signup') }}" class="cta-btn cta-primary">
+
+Create Account
+
+</a>
+
+<a href="{{ url_for('contact') }}" class="cta-btn cta-outline">
+Contact Us
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer class="about-footer">
+
+<div class="footer-grid">
+
+<div>
+
+<h2>QR Attendance System</h2>
+
+<p>
+
+A modern QR Code based Attendance Management System
+designed for educational institutions.
+Providing secure attendance tracking,
+real-time reports and automated eligibility monitoring.
+
+</p>
+
+</div>
+
+<div class="footer-links">
+
+<h3>Quick Links</h3>
+
+<a href="/">Home</a>
+
+<a href="/about">About</a>
+
+<a href="/contact">Contact</a>
+
+<a href="/login">Login</a>
+
+</div>
+
+<div>
+
+<h3>Contact</h3>
+
+<p>📍 ATI Jaffna</p>
+
+<p>📞 +94 77 000 0000</p>
+
+<p>📧 mathulaaravinthan@gmail.com</p>
+
+</div>
+
+</div>
+
+<div class="footer-divider"></div>
+
+<p class="footer-copy">
+
+© 2026 QR Attendance Management System. All Rights Reserved.<br>
+Developed by <strong>Aravinthan Mathula</strong>
+
+</p>
+
+</footer>
 
 {% endblock %}

@@ -1,250 +1,135 @@
-<!-- <!DOCTYPE html>
+{% extends "layout/base.html" %}
 
-<html>
-
-<head>
-
-<title>Login</title>
-
-</head>
-
-
-<body>
-
-
-<h1>Login</h1>
-
-
-
-<form method="POST">
-
-
-
-<label>Email</label>
-
-<input type="email" name="email" required>
-
-
-<br>
-
-
-<label>Password</label>
-
-<input type="password" name="password" required>
-
-
-<br>
-
-
-<label>Role</label>
-
-
-<select name="role">
-
-
-<option value="student">
-Student
-</option>
-
-
-<option value="lecturer">
-Lecturer
-</option>
-
-
-<option value="admin">
-Admin
-</option>
-
-
-</select>
-
-
-<br>
-
-
-<button type="submit">
-
+{% block title %}
 Login
+{% endblock %}
 
-</button>
-
-
-
-</form>
-
-
-<a href="/signup">
-Create Account
-</a>
-
-
-</body>
-
-
-</html> -->
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Login | QR Attendance System</title>
-
+{% block content %}
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI', sans-serif;
-}
-
-
 body{
-
-    min-height:100vh;
-
     background:#061a35;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
+    font-family:'Segoe UI',sans-serif;
 }
 
-
-/* Main Card */
-
-.container{
-
-    width:900px;
-
-    height:600px;
-
-    background:white;
-
+.login-page{
+    min-height:90vh;
     display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
 
+.login-container{
+    width:1000px;
+    display:grid;
+    grid-template-columns:45% 55%;
+    background:#fff;
     border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+    animation:fadeIn 1s ease;
+}
 
+/* Left */
+
+.left-side{
+
+    background:linear-gradient(135deg,#002b5c,#004aad);
+    color:white;
+    padding:60px 45px;
+    position:relative;
     overflow:hidden;
 
-    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+}
+
+.left-side::before{
+
+    content:"";
+    position:absolute;
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    top:-120px;
+    right:-100px;
 
 }
 
+.left-side::after{
 
-
-/* Left Side */
-
-
-.left-section{
-
-    width:45%;
-
-    background:linear-gradient(
-        160deg,
-        #002b5c,
-        #004aad
-    );
-
-    color:white;
-
-    padding:50px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:rgba(255,255,255,.06);
+    bottom:-100px;
+    left:-80px;
 
 }
 
+.logo{
 
-
-.left-section h1{
-
-    font-size:38px;
-
+    font-size:42px;
     margin-bottom:20px;
 
 }
 
+.left-side h1{
 
-.left-section p{
-
-    color:#d8e8ff;
-
-    line-height:1.7;
-
-    font-size:17px;
-
-}
-
-
-
-.system-info{
-
-    margin-top:35px;
-
-}
-
-
-.system-info div{
-
+    font-size:34px;
     margin-bottom:15px;
 
+}
+
+.left-side p{
+
+    line-height:1.8;
+    color:#d7e7ff;
+    margin-bottom:35px;
+
+}
+
+.feature{
+
+    display:flex;
+    align-items:center;
+    margin-bottom:18px;
     font-size:16px;
 
 }
 
+.feature span{
 
+    font-size:22px;
+    margin-right:12px;
 
-/* Right Side */
+}
 
+/* Right */
 
-.right-section{
-
-    width:55%;
+.right-side{
 
     padding:55px;
 
 }
 
-
-
-.right-section h2{
+.right-side h2{
 
     color:#002b5c;
-
     font-size:32px;
-
     margin-bottom:10px;
 
 }
 
-
-
 .subtitle{
 
     color:#777;
-
     margin-bottom:30px;
 
 }
-
-
-
-/* Form */
-
 
 .form-group{
 
@@ -252,343 +137,233 @@ body{
 
 }
 
-
-
 label{
 
     display:block;
-
     margin-bottom:8px;
-
     font-weight:600;
-
     color:#333;
 
 }
 
-
-
-input,select{
+input,
+select{
 
     width:100%;
-
-    padding:13px;
-
-    border:1px solid #ddd;
-
-    border-radius:8px;
-
+    padding:14px;
+    border:1px solid #dcdcdc;
+    border-radius:10px;
     font-size:15px;
+    transition:.3s;
 
 }
-
-
 
 input:focus,
 select:focus{
 
     outline:none;
-
     border-color:#004aad;
+    box-shadow:0 0 8px rgba(0,74,173,.25);
 
 }
-
-
-
 
 button{
 
     width:100%;
-
-    padding:14px;
-
-    margin-top:10px;
-
-    background:#004aad;
-
-    color:white;
-
+    padding:15px;
     border:none;
-
-    border-radius:8px;
-
+    border-radius:10px;
+    background:#004aad;
+    color:white;
     font-size:17px;
-
+    font-weight:bold;
     cursor:pointer;
+    transition:.3s;
 
 }
-
-
 
 button:hover{
 
     background:#002b5c;
+    transform:translateY(-2px);
 
 }
 
+.links{
 
-
-/* Signup Link */
-
-
-.signup{
-
-    text-align:center;
-
-    margin-top:25px;
-
-    color:#555;
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+    font-size:14px;
 
 }
 
-
-.signup a{
+.links a{
 
     color:#004aad;
-
-    font-weight:bold;
-
     text-decoration:none;
+    font-weight:600;
 
 }
 
+.links a:hover{
 
-
-/* Responsive */
-
-
-@media(max-width:800px){
-
-
-.container{
-
-    width:90%;
-
-    height:auto;
-
-    flex-direction:column;
+    text-decoration:underline;
 
 }
 
+@keyframes fadeIn{
 
-.left-section,
-.right-section{
+from{
+opacity:0;
+transform:translateY(30px);
+}
 
-    width:100%;
+to{
+opacity:1;
+transform:translateY(0);
+}
 
 }
 
+@media(max-width:900px){
+
+.login-container{
+
+grid-template-columns:1fr;
 
 }
 
+.left-side{
+
+display:none;
+
+}
+
+}
 
 </style>
 
+<div class="login-page">
 
-</head>
+<div class="login-container">
 
+<div class="left-side">
 
+<div class="logo">
+🎓
+</div>
 
-<body>
-
-
-
-<div class="container">
-
-
-
-<!-- Left Branding -->
-
-
-<div class="left-section">
-
-
-<h1>
-QR Attendance
-</h1>
-
+<h1>QR Attendance System</h1>
 
 <p>
 
-Secure login portal for students,
-lecturers and administrators.
+Welcome back to the Attendance Management System.
+Login to manage attendance, generate QR codes,
+track students and monitor attendance reports.
 
 </p>
 
-
-
-<div class="system-info">
-
-
-<div>
-🔐 Secure Authentication
+<div class="feature">
+<span>📱</span>
+QR Code Attendance
 </div>
 
-
-<div>
-📱 QR Based Attendance
+<div class="feature">
+<span>📊</span>
+Live Attendance Reports
 </div>
 
-
-<div>
-📊 Real-Time Reports
+<div class="feature">
+<span>👨‍🎓</span>
+Student Management
 </div>
 
-
-<div>
-🎓 University Management
+<div class="feature">
+<span>🔒</span>
+Secure Login
 </div>
-
-
 
 </div>
 
+<div class="right-side">
 
-
-</div>
-
-
-
-
-
-<!-- Login Form -->
-
-
-<div class="right-section">
-
-
-<h2>
-Welcome Back
-</h2>
-
+<h2>Welcome Back</h2>
 
 <p class="subtitle">
-Login to access your dashboard
+Sign in to continue
 </p>
-
-
-
 
 <form method="POST">
 
-
-
 <div class="form-group">
 
-<label>
-Email Address
-</label>
+<label>Email Address</label>
 
-
-<input 
+<input
 type="email"
 name="email"
 placeholder="Enter your email"
 required>
 
-
 </div>
-
-
-
-
 
 <div class="form-group">
 
-<label>
-Password
-</label>
+<label>Password</label>
 
-
-<input 
+<input
 type="password"
 name="password"
 placeholder="Enter your password"
 required>
 
-
 </div>
-
-
-
-
 
 <div class="form-group">
 
-<label>
-Login As
-</label>
-
+<label>Login As</label>
 
 <select name="role" required>
 
+<option value="">Select Role</option>
 
-<option value="">
-Select your role
-</option>
+<option value="student">Student</option>
 
+<option value="lecturer">Lecturer</option>
 
-<option value="student">
-Student
-</option>
-
-
-<option value="lecturer">
-Lecturer
-</option>
-
-
-<option value="admin">
-Admin
-</option>
-
+<option value="admin">Administrator</option>
 
 </select>
 
-
 </div>
 
-
-
-
 <button type="submit">
-
 Login
-
 </button>
 
-
-
-
-</form>
-
-
-
-
-<div class="signup">
-
-
-Don't have an account?
-
+<div class="links">
 
 <a href="/signup">
 Create Account
 </a>
 
+<!-- <a href="#">
+Forgot Password?
+</a> -->
+
+<a href="{{ url_for('auth.forgot_password') }}">
+Forgot Password?
+</a>
 
 </div>
 
-
-
-
-</div>
-
-
+</form>
 
 </div>
 
+</div>
 
+</div>
 
-</body>
-
-</html>
+{% endblock %}

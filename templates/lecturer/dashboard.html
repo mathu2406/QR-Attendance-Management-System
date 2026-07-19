@@ -1,17 +1,937 @@
-{% extends 'layout/base.html' %}
+{% extends "layout/base.html" %}
 
 {% block content %}
 
-<div class="dashboard">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/lecturer_dashboard.css') }}">
 
-<h1>Lecturer Dashboard</h1>
 
-<a href="/lecturer/generate-qr" class="btn"> -->
- Generate Attendance QR
-<a href="{{ url_for('lecturer.generate') }}">Generate QR</a>
+<div class="dashboard-wrapper">
 
-</a>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+
+        <div class="brand">
+
+            <h2>
+                QR Attend
+            </h2>
+
+            <p>
+                Lecturer Panel
+            </p>
+
+        </div>
+
+
+
+        <ul>
+
+
+            <li class="active">
+                🏠 Dashboard
+            </li>
+
+
+            <li>
+                📱
+                <a href="/lecturer/generate-qr">
+                    Generate QR
+                </a>
+            </li>
+
+
+            <li>
+                📊 Reports
+            </li>
+
+
+            <li>
+                👨‍🎓 Students
+            </li>
+
+
+            <li>
+                ⚙ Settings
+            </li>
+
+
+        </ul>
+
+
+
+        <a href="/logout" class="logout">
+
+            Logout
+
+        </a>
+
+
+    </aside>
+
+
+
+
+
+    <!-- Main Dashboard -->
+
+
+    <section class="main">
+
+
+
+        <!-- Header -->
+
+
+        <div class="top">
+
+
+            <div>
+
+                <h1>
+                    Welcome,
+                    {{ current_user.name }}
+                </h1>
+
+
+                <p>
+                    Manage attendance and QR sessions easily
+                </p>
+
+
+            </div>
+
+
+
+            <div class="profile">
+
+                👨‍🏫 Lecturer
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Statistics -->
+
+
+        <div class="statistics">
+
+
+
+            <div class="card">
+
+                <span>
+                    👨‍🎓
+                </span>
+
+
+                <h3>
+                    Total Students
+                </h3>
+
+
+                <h1>
+                    {{ total_students }}
+                </h1>
+
+
+            </div>
+
+
+
+
+
+            <div class="card">
+
+
+                <span>
+                    📅
+                </span>
+
+
+                <h3>
+                    Today's Attendance
+                </h3>
+
+
+                <h1>
+                    {{ today_attendance }}
+                </h1>
+
+
+            </div>
+
+
+
+
+
+            <div class="card">
+
+
+                <span>
+                    📈
+                </span>
+
+
+                <h3>
+                    Attendance Rate
+                </h3>
+
+
+                <h1>
+                    {{ attendance_percentage }}%
+                </h1>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <!-- QR Generate Area -->
+
+
+        <div class="qr-panel">
+
+
+            <div>
+
+
+                <h2>
+                    Create Attendance Session
+                </h2>
+
+
+                <p>
+                    Generate a secure QR code for your current lecture.
+                    Students can scan it to mark attendance.
+                </p>
+
+
+
+                <a href="/lecturer/generate-qr"
+                   class="button">
+
+
+                    Generate QR Code
+
+
+                </a>
+
+
+            </div>
+
+
+
+
+            <div class="qr-icon">
+
+                <div>
+                    QR
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <!-- Attendance Table -->
+
+
+        <div class="attendance">
+
+
+            <div class="title">
+
+
+                <h2>
+                    Recent Attendance Scans
+                </h2>
+
+
+            </div>
+
+
+
+
+
+            <table>
+
+
+                <thead>
+
+                <tr>
+
+                    <th>
+                        Student
+                    </th>
+
+
+                    <th>
+                        Date
+                    </th>
+
+
+                    <th>
+                        Status
+                    </th>
+
+
+                </tr>
+
+                </thead>
+
+
+
+
+                <tbody>
+
+
+                {% for record in recent_scans %}
+
+
+                <tr>
+
+
+                    <td>
+                        {{ record.student.name }}
+                    </td>
+
+
+                    <td>
+                        {{ record.date.strftime('%d %B %Y') }}
+                    </td>
+
+
+                    <td>
+
+                        <span class="status">
+
+                            Present
+
+                        </span>
+
+                    </td>
+
+
+                </tr>
+
+
+
+                {% else %}
+
+
+                <tr>
+
+                    <td colspan="3">
+
+                        No attendance records found
+
+                    </td>
+
+
+                </tr>
+
+
+                {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+
+        </div>
+
+
+
+
+    </section>
+
+
 
 </div>
+<style>
+
+*{
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+
+.dashboard-wrapper{
+
+    display:flex;
+    min-height:100vh;
+    background:#f1f5f9;
+
+}
+
+
+/* Sidebar */
+
+.sidebar{
+
+    width:260px;
+    background:#061a35;
+    color:white;
+    padding:30px;
+    animation:slide .8s ease;
+
+}
+
+
+.brand h2{
+
+    color:#38bdf8;
+    font-size:28px;
+
+}
+
+
+.brand p{
+
+    color:#cbd5e1;
+
+}
+
+
+.sidebar ul{
+
+    list-style:none;
+    padding:0;
+    margin-top:40px;
+
+}
+
+
+.sidebar li{
+
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+
+.sidebar li a{
+
+    color:white;
+    text-decoration:none;
+
+}
+
+
+.sidebar li:hover,
+.sidebar .active{
+
+    background:#004aad;
+    transform:translateX(8px);
+
+}
+
+
+
+.logout{
+
+    display:block;
+
+    margin-top:100px;
+
+    background:#dc2626;
+
+    color:white;
+
+    padding:12px;
+
+    text-align:center;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+
+.logout:hover{
+
+    background:#991b1b;
+
+}
+
+
+
+
+
+
+/* Main Dashboard */
+
+
+.main{
+
+    flex:1;
+    padding:35px;
+
+}
+
+
+
+
+.top{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+
+.top h1{
+
+    color:#061a35;
+    font-size:32px;
+
+}
+
+
+.top p{
+
+    color:#64748b;
+
+}
+
+
+.profile{
+
+    background:white;
+
+    padding:15px 25px;
+
+    border-radius:30px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+}
+
+
+
+
+
+
+/* Statistics Cards */
+
+
+.statistics{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:25px;
+
+    margin-top:35px;
+
+}
+
+
+
+.card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.08);
+
+    transition:.4s;
+
+    animation:fadeUp .8s;
+
+}
+
+
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+
+.card span{
+
+    font-size:40px;
+
+}
+
+
+.card h3{
+
+    color:#475569;
+
+}
+
+
+.card h1{
+
+    color:#004aad;
+
+    font-size:35px;
+
+}
+
+
+
+
+
+
+
+/* QR Section */
+
+
+.qr-panel{
+
+    margin-top:35px;
+
+    padding:40px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #004aad,
+    #38bdf8
+    );
+
+    border-radius:25px;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    animation:fadeUp 1s;
+
+}
+
+
+
+.qr-panel h2{
+
+    font-size:30px;
+
+}
+
+
+
+.button{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:14px 30px;
+
+    background:white;
+
+    color:#004aad;
+
+    text-decoration:none;
+
+    border-radius:30px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+
+
+.button:hover{
+
+    transform:scale(1.05);
+
+}
+
+
+
+
+
+.qr-icon div{
+
+    width:160px;
+
+    height:160px;
+
+    background:white;
+
+    color:#004aad;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:45px;
+
+    animation:pulse 2s infinite;
+
+}
+
+
+
+
+
+
+
+/* Attendance Table */
+
+
+.attendance{
+
+    margin-top:35px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 15px 30px rgba(0,0,0,.08);
+
+}
+
+
+
+.attendance h2{
+
+    color:#061a35;
+
+    margin-bottom:20px;
+
+}
+
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+
+th{
+
+    background:#f8fafc;
+
+    color:#334155;
+
+}
+
+
+
+th,td{
+
+    padding:15px;
+
+    text-align:left;
+
+    border-bottom:1px solid #e2e8f0;
+
+}
+
+
+
+tr:hover{
+
+    background:#f8fafc;
+
+}
+
+
+
+.status{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+    padding:6px 15px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+
+}
+
+
+
+
+
+
+/* Animations */
+
+
+@keyframes slide{
+
+from{
+
+transform:translateX(-100px);
+
+opacity:0;
+
+}
+
+
+to{
+
+transform:translateX(0);
+
+opacity:1;
+
+}
+
+}
+
+
+
+
+@keyframes fadeUp{
+
+from{
+
+transform:translateY(40px);
+
+opacity:0;
+
+}
+
+
+to{
+
+transform:translateY(0);
+
+opacity:1;
+
+}
+
+}
+
+
+
+@keyframes pulse{
+
+
+0%{
+
+transform:scale(1);
+
+}
+
+
+50%{
+
+transform:scale(1.1);
+
+}
+
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+
+
+
+
+/* Responsive */
+
+
+@media(max-width:900px){
+
+
+.dashboard-wrapper{
+
+    flex-direction:column;
+
+}
+
+
+.sidebar{
+
+    width:100%;
+
+}
+
+
+.statistics{
+
+    grid-template-columns:1fr;
+
+}
+
+
+.qr-panel{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+
+}
+
+</style>
 
 {% endblock %}

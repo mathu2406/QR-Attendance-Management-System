@@ -1,18 +1,19 @@
+from models import db
 from datetime import datetime
 
-from models import db
-
-
 class QRSession(db.Model):
-
     __tablename__ = "qr_sessions"
 
     id = db.Column(db.Integer, primary_key=True)
 
-    token = db.Column(db.String(200), unique=True)
+    subject = db.Column(db.String(100), nullable=False)
 
-    lecturer_id = db.Column(db.Integer)
+    lecturer_id = db.Column(db.Integer, nullable=False)
+
+    token = db.Column(db.String(255), unique=True, nullable=False)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    active = db.Column(db.Boolean, default=True)
+    expiry_time = db.Column(db.DateTime, nullable=False)
+
+    is_active = db.Column(db.Boolean, default=True)

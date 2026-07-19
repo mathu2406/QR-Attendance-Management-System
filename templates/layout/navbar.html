@@ -1,38 +1,260 @@
-<nav>
+<nav class="navbar">
 
-<h2>
-QR Attendance System
-</h2>
+    <div class="navbar-container">
 
 
-<div>
+        <!-- Website Name -->
+        <center>
+        <div class="navbar-brand">
 
-<a href="/">
-Home
-</a>
+            ATI QR BASED STUDENT ATTENDANCE AND 
+            <br>ELIGIBILITY TRACKING SYSTEM
 
-
-<a href="/about">
-About
-</a>
-
-
-<a href="/contact">
-Contact
-</a>
+        </div>
+        </center>
 
 
-<a href="/signup">
-Signup
-</a>
+        <!-- Menu -->
+
+        <div class="navbar-menu">
 
 
-<a href="/login">
-Login
-</a>
+            <a href="{{ url_for('home') }}">
+                Home
+            </a>
 
 
-</div>
+            <a href="{{ url_for('about') }}">
+                About
+            </a>
+
+
+            <a href="{{ url_for('contact') }}">
+                Contact
+            </a>
+
+
+            <a href="{{ url_for('auth.signup') }}">
+                Signup
+            </a>
+
+
+            <a href="{{ url_for('auth.login') }}">
+                Login
+            </a>
+
+
+        </div>
+
+
+    </div>
 
 
 </nav>
+
+
+
+
+
+<style>
+
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+}
+
+
+
+/* Navbar */
+
+.navbar{
+
+
+height:130px;
+
+
+background:#263f91;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+padding:0 30px;
+
+
+}
+
+
+
+/* Container */
+
+
+.navbar-container{
+
+
+width:100%;
+
+
+display:flex;
+
+
+justify-content:space-between;
+
+
+align-items:center;
+
+
+}
+
+
+
+
+
+/* Logo */
+
+
+.navbar-brand{
+
+
+color:white;
+
+
+font-size:30px;
+
+
+font-weight:700;
+
+
+font-family:
+'Segoe UI',
+sans-serif;
+
+
+}
+
+
+
+
+
+/* Menu */
+
+
+.navbar-menu{
+
+
+display:flex;
+
+
+align-items:center;
+
+
+gap:35px;
+
+
+}
+
+
+
+
+
+.navbar-menu a{
+
+
+color:white;
+
+
+text-decoration:none;
+
+
+font-size:20px;
+
+
+font-weight:500;
+
+
+font-family:
+'Segoe UI',
+sans-serif;
+
+
+transition:.3s;
+
+
+}
+
+
+
+
+
+.navbar-menu a:hover{
+
+
+opacity:.75;
+
+
+transform:translateY(-2px);
+
+
+}
+
+
+
+
+
+/* Responsive */
+
+
+@media(max-width:800px){
+
+
+.navbar{
+
+
+height:auto;
+
+
+padding:25px;
+
+
+}
+
+
+
+.navbar-container{
+
+
+flex-direction:column;
+
+
+gap:25px;
+
+
+}
+
+
+
+.navbar-menu{
+
+
+flex-wrap:wrap;
+
+
+justify-content:center;
+
+
+}
+
+
+
+}
+
+</style>

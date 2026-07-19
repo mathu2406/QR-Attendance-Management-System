@@ -1,20 +1,28 @@
+from models import db
 from datetime import datetime
 
-from models import db
+# class Attendance(db.Model):
+#     __tablename__ = "attendance"
+
+#     id = db.Column(db.Integer, primary_key=True)
+
+#     student_id = db.Column(db.Integer, nullable=False)
+
+#     subject = db.Column(db.String(100), nullable=False)
+
+#     date = db.Column(db.Date, default=datetime.utcnow)
+
+#     status = db.Column(db.String(20), default="Present")
 
 
 class Attendance(db.Model):
 
-    __tablename__ = "attendance"
-
     id = db.Column(db.Integer, primary_key=True)
 
-    student_id = db.Column(db.Integer)
+    name = db.Column(db.String(100))
 
-    lecturer_id = db.Column(db.Integer)
+    email = db.Column(db.String(120))
 
-    date = db.Column(db.Date, default=datetime.utcnow)
+    ati_number = db.Column(db.String(30))
 
-    time = db.Column(db.Time, default=datetime.utcnow)
-
-    status = db.Column(db.String(20), default="Present")
+    qr_token = db.Column(db.String(100))

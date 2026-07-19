@@ -1,136 +1,99 @@
-# from flask import Blueprint, render_template, request, redirect
-# from flask_login import login_required, current_user
-
-# from services.qr_service import generate_qr
-
-# lecturer_bp = Blueprint("lecturer", __name__)
-
-
-# @lecturer_bp.route("/lecturer/dashboard")
-# @login_required
-# def dashboard():
-
-#     if current_user.role != "lecturer":
-#         return "Access Denied"
-
-#     return render_template("lecturer/dashboard.html")
-
-
-# @lecturer_bp.route("/lecturer/generate-qr", methods=["GET", "POST"])
-# @login_required
-# def generate_qr_page():
-
-#     if current_user.role != "lecturer":
-#         return "Access Denied"
-
-#     if request.method == "POST":
-
-#         subject = request.form["subject"]
-
-#         path, token = generate_qr(subject, current_user.id)
-
-#         return render_template(
-#             "lecturer/show_qr.html",
-#             qr_image=path,
-#             token=token
-#         )
-
-#     return render_template("lecturer/generate_qr.html")
-
-# from flask import Blueprint, render_template, request
-# from flask_login import login_required, current_user
-
-# from services.qr_service import generate_qr
-# from models.notification import Notification
-
-# lecturer_bp = Blueprint("lecturer", __name__)
-
-# @lecturer_bp.route("/lecturer/notifications")
-# @login_required
-# def notifications():
-
-#     if current_user.role != "lecturer":
-#         return "Access Denied"
-
-#     notifications = Notification.query.filter_by(
-#         lecturer_id=current_user.id
-#     ).order_by(Notification.created_at.desc()).all()
-
-#     return render_template(
-#         "lecturer/notifications.html",
-#         notifications=notifications
-#     )
-
-# @lecturer_bp.route("/lecturer/dashboard")
-# @login_required
-# def dashboard():
-
-#     if current_user.role != "lecturer":
-#         return "Access Denied"
-
-#     return render_template("lecturer/dashboard.html")
-
-
-# @lecturer_bp.route("/lecturer/generate", methods=["GET", "POST"])
-# @login_required
-# def generate():
-
-#     if current_user.role != "lecturer":
-#         return "Access Denied"
-
-#     qr_image = None
-
-#     if request.method == "POST":
-
-#         subject = request.form["subject"]
-
-#         filename, token = generate_qr(
-#             subject,
-#             current_user.id
-#         )
-
-#         qr_image = filename
-
-#     return render_template(
-#         "lecturer/generate_qr.html",
-#         qr_image=qr_image
-#     )
-
-
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
+import qrcode
+import uuid
+import os
+from datetime import datetime
 
-from services.qr_service import generate_qr
-from models.notification import Notification
+lecturer_bp = Blueprint(
+    "lecturer",
+    __name__,
+    url_prefix="/lecturer"
+)
 
-lecturer_bp = Blueprint("lecturer", __name__)
 
-@lecturer_bp.route("/lecturer/dashboard")
+
+@lecturer_bp.route("/generate-qr", methods=["GET","POST"])
 @login_required
-def dashboard():
-
-    if current_user.role != "lecturer":
-        return "Access Denied"
-
-    return render_template("lecturer/dashboard.html")
-
-
-@lecturer_bp.route("/lecturer/generate", methods=["GET", "POST"])
-@login_required
-def generate():
-
-    if current_user.role != "lecturer":
-        return "Access Denied"
+def generate_qr():
 
     qr_image = None
 
+
     if request.method == "POST":
 
-        subject = request.form["subject"]
 
-        filename, token = generate_qr(subject, current_user.id)
+        subject = request.form.get("subject")
 
-        qr_image = filename
+
+        if subject:
+
+
+            # Unique QR Token
+
+            token = str(uuid.uuid4())
+
+
+
+            # QR Data
+
+            qr_data = (
+                f"Attendance System\n"
+                f"Subject: {subject}\n"
+                f"Token:{token}"
+            )
+
+
+
+            qr = qrcode.QRCode(
+                version=1,
+                box_size=10,
+                border=5
+            )
+
+
+            qr.add_data(qr_data)
+
+            qr.make(
+                fit=True
+            )
+
+
+            img = qr.make_image(
+                fill_color="black",
+                back_color="white"
+            )
+
+
+
+            # Save folder
+
+            folder = "static/qr"
+
+
+            os.makedirs(
+                folder,
+                exist_ok=True
+            )
+
+
+            filename = f"{token}.png"
+
+
+
+            filepath = os.path.join(
+                folder,
+                filename
+            )
+
+
+            img.save(filepath)
+
+
+
+            qr_image = "/" + filepath
+
+
 
     return render_template(
         "lecturer/generate_qr.html",
@@ -138,18 +101,12 @@ def generate():
     )
 
 
-@lecturer_bp.route("/lecturer/notifications")
+@lecturer_bp.route("/lecturer/session")
 @login_required
-def notifications():
+def live_session():
 
     if current_user.role != "lecturer":
         return "Access Denied"
 
-    notifications = Notification.query.filter_by(
-        lecturer_id=current_user.id
-    ).order_by(Notification.created_at.desc()).all()
+    return render_template("lecturer/session.html")
 
-    return render_template(
-        "lecturer/notifications.html",
-        notifications=notifications
-    )

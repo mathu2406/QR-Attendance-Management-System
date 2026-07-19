@@ -1,3 +1,309 @@
-<h1>
+<!-- <h1>
 Admin Dashboard
-</h1>
+</h1> -->
+
+{% extends "layout/base.html" %}
+
+{% block title %}
+Admin Dashboard
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+body{
+    background:#eef3f9;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.dashboard{
+    max-width:1300px;
+    margin:35px auto;
+    padding:20px;
+}
+
+/* Hero */
+
+.hero{
+    background:linear-gradient(135deg,#002b5c,#004aad);
+    color:white;
+    border-radius:20px;
+    padding:40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    animation:slideDown .8s ease;
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.hero h1{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:#dbeaff;
+}
+
+.hero-icon{
+    font-size:70px;
+}
+
+/* Cards */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    margin-top:35px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.35s;
+    animation:fadeUp .8s ease;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+
+.card h3{
+    color:#004aad;
+    margin-top:15px;
+}
+
+.card h1{
+    color:#002b5c;
+    font-size:40px;
+    margin-top:10px;
+}
+
+/* Actions */
+
+.actions{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.action-btn{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    text-decoration:none;
+    color:#002b5c;
+    font-weight:bold;
+    transition:.3s;
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.action-btn:hover{
+    background:#004aad;
+    color:white;
+    transform:scale(1.05);
+}
+
+/* Table */
+
+.table-box{
+    margin-top:45px;
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    animation:fadeUp 1s;
+}
+
+.table-box h2{
+    color:#002b5c;
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#002b5c;
+    color:white;
+    padding:15px;
+}
+
+td{
+    padding:15px;
+    border-bottom:1px solid #eee;
+}
+
+tr:hover{
+    background:#f5f9ff;
+}
+
+/* Status */
+
+.active{
+    color:#28a745;
+    font-weight:bold;
+}
+
+.pending{
+    color:#ff9800;
+    font-weight:bold;
+}
+
+/* Animation */
+
+@keyframes slideDown{
+
+from{
+opacity:0;
+transform:translateY(-40px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(40px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+</style>
+
+<div class="dashboard">
+
+<div class="hero">
+
+<div>
+
+<h1>Welcome, {{ user.name }}</h1>
+
+<p>
+Manage lecturers, students, attendance sessions and system settings from one place.
+</p>
+
+</div>
+
+<div class="hero-icon">
+🛡️
+</div>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h2>👨‍🎓 Students</h2>
+<h1>{{ total_students|default(0) }}</h1>
+</div>
+
+<div class="card">
+<h2>👨‍🏫 Lecturers</h2>
+<h1>{{ total_lecturers|default(0) }}</h1>
+</div>
+
+<div class="card">
+<h2>📅 Attendance Sessions</h2>
+<h1>{{ total_sessions|default(0) }}</h1>
+</div>
+
+<div class="card">
+<h2>📈 Attendance Rate</h2>
+<h1>{{ attendance_rate|default(0) }}%</h1>
+</div>
+
+</div>
+
+<div class="actions">
+
+<a href="#" class="action-btn">
+👨‍🎓<br><br>
+Manage Students
+</a>
+
+<a href="#" class="action-btn">
+👨‍🏫<br><br>
+Manage Lecturers
+</a>
+
+<a href="#" class="action-btn">
+📊<br><br>
+Attendance Reports
+</a>
+
+<a href="#" class="action-btn">
+⚙️<br><br>
+System Settings
+</a>
+
+</div>
+
+<div class="table-box">
+
+<h2>Recent Activities</h2>
+
+<table>
+
+<tr>
+<th>User</th>
+<th>Role</th>
+<th>Activity</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>John Silva</td>
+<td>Student</td>
+<td>Scanned Attendance QR</td>
+<td class="active">Completed</td>
+</tr>
+
+<tr>
+<td>Mr. Perera</td>
+<td>Lecturer</td>
+<td>Generated QR Code</td>
+<td class="active">Completed</td>
+</tr>
+
+<tr>
+<td>Nimal</td>
+<td>Student</td>
+<td>Attendance Pending</td>
+<td class="pending">Pending</td>
+</tr>
+
+<tr>
+<td>Admin</td>
+<td>Administrator</td>
+<td>Added New Lecturer</td>
+<td class="active">Completed</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+{% endblock %}
